@@ -1,27 +1,54 @@
-# DevTaskLog
+# App Concept: DevTask Log
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.21.
+A lightweight task & learning tracker for developers.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Problem
 
-## Code scaffolding
+Developers:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Work on tasks every day
+- Learn things implicitly
+- Forget what they learned after weeks or months
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Solution
 
-## Running unit tests
+A web app where:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- You log tasks
+- You attach technologies & learnings
+- You get a clear learning summary
 
-## Running end-to-end tests
+---
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Task Log
 
-## Further help
+Each task has:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Title**
+- **Short description**
+- **Tech used** (e.g. Angular, Node, SQL)
+- **Date**
+- **Time spent**
+
+---
+
+## Learning Notes
+
+For every task:
+
+- **What I learned** (free text)
+- **Optional difficulty**: Easy / Medium / Hard
+
+---
+
+## Simple Dashboard
+
+Shows:
+
+- Total tasks completed
+- Time spent per technology
+- Most-used technology
