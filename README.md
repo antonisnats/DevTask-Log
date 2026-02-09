@@ -47,9 +47,3 @@ Shows:
 - Total tasks completed
 - Time spent per technology
 - Most-used technology
-
----
-
-## Export / Share Summary
-
-- Generate a weekly or monthly summary
