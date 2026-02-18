@@ -17,11 +17,12 @@
   font-size: 13px;
   letter-spacing: 1px;
   gap: 4px;
-  transition: 0.2s;
+  transition: color 0.2s ease;
 }
 
 .nav-item .material-icons {
   font-size: 28px;
+  color: inherit;
 }
 
 .nav-item.left {
@@ -33,9 +34,12 @@
   transform: translateX(-50%);
 }
 
-.nav-item.active {
+.nav-item.active,
+.nav-item.active .material-icons,
+.nav-item.active .label {
   color: #87cefa;
 }
+
 
 .cta {
   position: absolute;

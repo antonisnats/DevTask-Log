@@ -1,12 +1,12 @@
 <nav class="navbar">
 
-  <a class="nav-item left" routerLink={{navigationItems[0].path}} routerLinkActive="active">
+  <a class="nav-item left" [routerLink]="['/',navigationItems[0].path]" routerLinkActive="active">
 
     <span class="material-icons">{{ navigationItems[0].icon }}</span>
     <span class="label">{{ navigationItems[0].name }}</span>
   </a>
 
-  <a class="nav-item center" routerLink={{navigationItems[1].path}} routerLinkActive="active">
+  <a class="nav-item center" [routerLink]="['/',navigationItems[1].path]" routerLinkActive="active">
 
     <span class="material-icons">{{ navigationItems[1].icon }}</span>
     <span class="label">{{ navigationItems[1].name }}</span>
