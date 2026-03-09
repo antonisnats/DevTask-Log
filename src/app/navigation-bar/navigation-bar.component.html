@@ -1,17 +1,11 @@
 <nav class="navbar">
-
-  <a class="nav-item left" [routerLink]="['/',navigationItems[0].path]" routerLinkActive="active">
-
-    <span class="material-icons">{{ navigationItems[0].icon }}</span>
-    <span class="label">{{ navigationItems[0].name }}</span>
+  @for(item of navigationItems; track $index; let i = $index;) {
+  <a class="nav-item" [class.left]="i === 0" [class.center]="i === 1" [routerLink]="['/',item.path]"
+    routerLinkActive="active">
+    <span class="material-icons">{{item.icon}}</span>
+    <span class="label">{{item.name}}</span>
   </a>
-
-  <a class="nav-item center" [routerLink]="['/',navigationItems[1].path]" routerLinkActive="active">
-
-    <span class="material-icons">{{ navigationItems[1].icon }}</span>
-    <span class="label">{{ navigationItems[1].name }}</span>
-  </a>
-
+  }
   <button class="cta" (click)="createSession()">
     <span class="material-icons">+</span>
   </button>
