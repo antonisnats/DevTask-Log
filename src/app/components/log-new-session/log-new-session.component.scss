@@ -54,17 +54,13 @@ label {
 }
 
 .tech-chip {
-  padding: 8px 14px;
   border-radius: 20px;
-  border: none;
-  background: #eef1f6;
   font-size: 13px;
-  cursor: pointer;
 }
 
 .tech-chip.active {
-  background: #0f172a;
-  color: white;
+  background: #0f172a !important;
+  color: white !important;
 }
 
 .difficulty {
@@ -75,27 +71,16 @@ label {
 
 .difficulty-btn {
   flex: 1;
-  padding: 12px;
   border-radius: 20px;
-  border: none;
-  background: #eef1f6;
-  cursor: pointer;
 }
 
 .difficulty-btn.active {
-  background: #0f172a;
-  color: white;
+  background: #0f172a !important;
+  color: white !important;
 }
 
 .submit-btn {
   width: 100%;
   margin-top: 30px;
-  padding: 16px;
   border-radius: 18px;
-  border: none;
-  background: linear-gradient(90deg, #5f55ea, #6a5acd);
-  color: white;
-  font-weight: 600;
-  letter-spacing: 1px;
-  cursor: pointer;
 }

@@ -1,5 +1,4 @@
 import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { NavigationBarComponent } from '../navigation-bar/navigation-bar.component';
 import { LogNewSessionComponent } from '../log-new-session/log-new-session.component';
 

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 type Difficulty = 'Easy' | 'Medium' | 'Hard';
 
@@ -16,7 +17,7 @@ type Session = {
 @Component({
   selector: 'app-log-new-session',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,MatButtonModule],
   templateUrl: './log-new-session.component.html',
   styleUrls: ['./log-new-session.component.scss'],
 })

@@ -39,6 +39,7 @@
 <div class="tech-list">
   @for (tech of techOptions; track tech) {
     <button
+      mat-stroked-button
       type="button"
       class="tech-chip"
       (click)="toggleTech(tech)"
@@ -62,6 +63,7 @@
 <div class="difficulty">
   @for (level of difficulties; track level) {
     <button
+      mat-button
       type="button"
       class="difficulty-btn"
       (click)="setDifficulty(level)"
@@ -72,6 +74,8 @@
 </div>
 
 <button
+  mat-raised-button
+  color="primary"
   class="submit-btn"
   [disabled]="!signalValid"
   (click)="submitSignal()">
