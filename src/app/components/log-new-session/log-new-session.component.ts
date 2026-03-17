@@ -3,7 +3,7 @@ import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 
-type Difficulty = 'Easy' | 'Medium' | 'Hard';
+type Difficulty = string;
 
 type Session = {
   title: string;
@@ -23,12 +23,12 @@ type Session = {
 })
 export class LogNewSessionComponent {
 
-  techOptions = [
+  readonly TECH_OPTIONS = [
     'React','Angular','Vue','Node.js','Python',
     'SQL','TypeScript','AWS','Docker','GraphQL'
   ];
 
-  difficulties: Difficulty[] = ['Easy','Medium','Hard'];
+  readonly DIFFICULTIES: Difficulty[] = ['Easy','Medium','Hard'];
 
   protected signalModel = signal<Session>({
     title: '',
@@ -44,7 +44,7 @@ export class LogNewSessionComponent {
   protected signalErrors = computed(() => {
     const model = this.signalModel();
     const messages: string[] = [];
-
+    
     if (!model.title.trim()) {
       messages.push('Task title is required.');
     }
@@ -57,14 +57,11 @@ export class LogNewSessionComponent {
       messages.push('Select at least one technology.');
     }
 
-    return messages;
+    return { hasError: messages.length > 0, messages };    
+
   });
 
-  protected get signalValid(): boolean {
-    return this.signalErrors().length === 0;
-  }
-
-  protected updateSignal(field: keyof Session, value: any): void {
+  protected updateSignal(field: keyof Session, value: string[] | number | Difficulty): void {
     this.signalModel.update((current) => ({
       ...current,
       [field]: value
@@ -86,7 +83,8 @@ export class LogNewSessionComponent {
   }
 
   protected submitSignal(): void {
-    if (!this.signalValid) {
+    const hasError = this.signalErrors();
+    if (hasError) {
       return;
     }
     this.signalSubmission.set(this.signalModel());

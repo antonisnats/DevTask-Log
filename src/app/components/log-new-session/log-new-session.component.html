@@ -37,7 +37,7 @@
 <label>TECH USED</label>
 
 <div class="tech-list">
-  @for (tech of techOptions; track tech) {
+  @for (tech of TECH_OPTIONS; track tech) {
     <button
       mat-stroked-button
       type="button"
@@ -61,7 +61,7 @@
 <label>RELATIVE DIFFICULTY</label>
 
 <div class="difficulty">
-  @for (level of difficulties; track level) {
+  @for (level of DIFFICULTIES; track level) {
     <button
       mat-button
       type="button"
@@ -77,14 +77,14 @@
   mat-raised-button
   color="primary"
   class="submit-btn"
-  [disabled]="!signalValid"
+  [disabled]="signalErrors().hasError"
   (click)="submitSignal()">
   LOG SESSION
 </button>
 
-@if (signalErrors().length > 0) {
+@if (signalErrors().hasError) {
   <div class="errors">
-    @for (err of signalErrors(); track err) {
+    @for (err of signalErrors().messages; track err) {
       <p>{{err}}</p>
     }
   </div>
