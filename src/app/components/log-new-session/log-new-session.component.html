@@ -1,93 +1,65 @@
 <div class="session-container">
 
-<h2>Log New Session</h2>
+  <h2>Log New Session</h2>
 
-<label>TASK TITLE</label>
-<input
-  class="input"
-  placeholder="e.g., Refactored Auth Middleware"
-  [value]="signalModel().title"
-  (input)="updateSignal('title',$any($event.target).value)"
-/>
+  <label>TASK TITLE</label>
+  <input class="input" placeholder="e.g., Refactored Auth Middleware" [value]="signalModel().title"
+    (input)="updateSignal('title',$any($event.target).value)" />
+  @if (signalErrors().messages.includes('Task title is required.')) {
+  <small class="text-danger">Task title is required.</small>
+  }
 
-<div class="row">
+  <div class="row">
 
-  <div class="field">
-    <label>DATE</label>
-    <input
-      type="date"
-      class="input"
-      [value]="signalModel().date"
-      (input)="updateSignal('date',$any($event.target).value)"
-    />
+    <div class="field">
+      <label>DATE</label>
+      <input type="date" class="input" [value]="signalModel().date"
+        (input)="updateSignal('date',$any($event.target).value)" />
+    </div>
+
+    <div class="field">
+      <label>TIME SPENT (H)</label>
+      <input type="number" class="input" [value]="signalModel().timeSpent"
+        (input)="updateSignal('timeSpent',+$any($event.target).value)" />
+      @if (signalErrors().messages.includes('Time spent must be greater than 0.')) {
+      <small class="text-danger">Time spent must be greater than 0.</small>
+      }
+    </div>
+
   </div>
 
-  <div class="field">
-    <label>TIME SPENT (H)</label>
-    <input
-      type="number"
-      class="input"
-      [value]="signalModel().timeSpent"
-      (input)="updateSignal('timeSpent',+$any($event.target).value)"
-    />
-  </div>
-
-</div>
-
-<label>TECH USED</label>
-
-<div class="tech-list">
-  @for (tech of TECH_OPTIONS; track tech) {
-    <button
-      mat-stroked-button
-      type="button"
-      class="tech-chip"
-      (click)="toggleTech(tech)"
+  <label>TECH USED</label>
+  <div class="tech-list">
+    @for (tech of TECH_OPTIONS; track tech) {
+    <button mat-stroked-button type="button" class="tech-chip" (click)="toggleTech(tech)"
       [class.active]="signalModel().techUsed.includes(tech)">
       {{tech}}
     </button>
+    }
+  </div>
+  @if (signalErrors().messages.includes('Select at least one technology.')) {
+  <small class="text-danger">Select at least one technology.</small>
   }
-</div>
 
-<label>WHAT DID YOU LEARN?</label>
-
-<textarea
-  class="textarea"
-  [value]="signalModel().notes"
-  placeholder="Summarize the core insight or technical takeaway..."
-  (input)="updateSignal('notes',$any($event.target).value)">
+  <label>WHAT DID YOU LEARN?</label>
+  <textarea class="textarea" [value]="signalModel().notes"
+    placeholder="Summarize the core insight or technical takeaway..."
+    (input)="updateSignal('notes',$any($event.target).value)">
 </textarea>
 
-<label>RELATIVE DIFFICULTY</label>
-
-<div class="difficulty">
-  @for (level of DIFFICULTIES; track level) {
-    <button
-      mat-button
-      type="button"
-      class="difficulty-btn"
-      (click)="setDifficulty(level)"
+  <label>RELATIVE DIFFICULTY</label>
+  <div class="difficulty">
+    @for (level of DIFFICULTIES; track level) {
+    <button mat-button type="button" class="difficulty-btn" (click)="setDifficulty(level)"
       [class.active]="signalModel().difficulty === level">
       {{level}}
     </button>
-  }
-</div>
-
-<button
-  mat-raised-button
-  color="primary"
-  class="submit-btn"
-  [disabled]="signalErrors().hasError"
-  (click)="submitSignal()">
-  LOG SESSION
-</button>
-
-@if (signalErrors().hasError) {
-  <div class="errors">
-    @for (err of signalErrors().messages; track err) {
-      <p>{{err}}</p>
     }
   </div>
-}
+
+  <button mat-raised-button color="primary" class="submit-btn" [disabled]="signalErrors().hasError"
+    (click)="submitSignal()">
+    LOG SESSION
+  </button>
 
 </div>
