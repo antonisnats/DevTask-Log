@@ -1,36 +1,29 @@
-<div class="container-fluid">
-  <div class="row mt-5">
-    <div class="col">
-      <div class="col-4">
-        <div class="card shadow">
-          <div class="card-body">
-            <form>
-              <div class="mb-3">
-                <h4 class="text-dar text-muted">
-                  Register
-                </h4>
-              </div>
+<div class="register-wrapper">
+  <div class="card shadow register-card">
+    <div class="card-body">
+      <form>
+        <div class="mb-3">
+          <h4 class="text-muted">Register</h4>
+        </div>
 
-              <div class="mb-3">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" name="email" [(ngModel)]="email" placeholder="Enter email">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" name="password" [(ngModel)]="password" placeholder="Password">
-              </div>
-              <button type="login" class="btn btn-info" (click)="register()">Register</button>
-              <div class="row">
-                <div class="col-md-6">
-                  <a href="/login" style="text-decoration: none;">Have an account ? <span class="text-danger">Login</span></a>
-                </div>
-              </div>
-            </form>
+        <div class="mb-3">
+          <label>Email address</label>
+          <input type="email" class="form-control" name="email" [(ngModel)]="email" placeholder="Enter email">
+        </div>
+
+        <div class="mb-3">
+          <label>Password</label>
+          <input type="password" class="form-control" name="password" [(ngModel)]="password" placeholder="Password">
+        </div>
+
+        <button type="button" class="btn btn-info w-100 mb-3" (click)="register()">Register</button>
+
+        <div class="row">
+          <div class="col-md-6">
+            <a href="/login" style="text-decoration: none;">Have an account? <span class="text-danger">Login</span></a>
           </div>
         </div>
-      </div>
-      <div class="col-6">
-      </div>
+      </form>
     </div>
   </div>
 </div>
