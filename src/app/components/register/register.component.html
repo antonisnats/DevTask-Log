@@ -1,26 +1,32 @@
 <div class="register-wrapper">
-  <div class="card shadow register-card">
+  <div class="register-card shadow auth-card">
     <div class="card-body">
-      <form>
+      <form [formGroup]="registerForm" (ngSubmit)="register()">
         <div class="mb-3">
           <h4 class="text-muted">Register</h4>
         </div>
 
         <div class="mb-3">
           <label>Email address</label>
-          <input type="email" class="form-control" name="email" [(ngModel)]="email" placeholder="Enter email">
+          <input type="email" class="form-control" formControlName="email" placeholder="Enter email">
+          @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+            <small class="text-danger">Enter a valid email</small>
+          }
         </div>
 
         <div class="mb-3">
           <label>Password</label>
-          <input type="password" class="form-control" name="password" [(ngModel)]="password" placeholder="Password">
+          <input type="password" class="form-control" formControlName="password" placeholder="Password">
+          @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+            <small class="text-danger">Password must be at least 6 characters</small>
+          }
         </div>
 
-        <button type="button" class="btn btn-info w-100 mb-3" (click)="register()">Register</button>
+        <button type="submit" class="btn btn-info w-100 mb-3" [disabled]="registerForm.invalid">Register</button>
 
         <div class="row">
           <div class="col-md-6">
-            <a href="/login" style="text-decoration: none;">Have an account? <span class="text-danger">Login</span></a>
+            <a href="/login" style="text-decoration: none;">Have account? <span class="text-danger">Login</span></a>
           </div>
         </div>
       </form>

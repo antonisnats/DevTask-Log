@@ -1,35 +1,29 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
 
-  email: string= '';
-  password: string = '';
-  
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)])
+  });
+
   constructor(private auth: AuthService) {}
 
   login() {
-    if(this.email == '') {
-      alert('Please enter email');
-      return;
-    }
+    if (this.loginForm.invalid) return;
 
-    if(this.password == '') {
-      alert('Please enter password');
-      return;
-    }
-
-    this.auth.login(this.email,this.password);
-    this.email = '';
-    this.password = ''
+    const { email, password } = this.loginForm.value;
+    this.auth.login(email!, password!);
+    this.loginForm.reset(); 
   }
 }
