@@ -65,3 +65,22 @@
 .cta:hover {
   transform: scale(1.08);
 }
+
+.logout-btn {
+  position: absolute;
+  right: 30px;
+  top: 120px;                          
+  border: 2px solid #6a5acd;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #6a5acd;
+  color: #fff;
+}

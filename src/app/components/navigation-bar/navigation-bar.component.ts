@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 interface NavigationItem {
   name: string;
@@ -24,9 +25,13 @@ export class NavigationBarComponent {
   ];
 
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
   createSession() {
     this.create.emit();
+  }
+
+  logout() {
+    this.auth.logout();
   }
 }
