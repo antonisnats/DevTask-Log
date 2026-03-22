@@ -5,8 +5,8 @@
   <label>TASK TITLE</label>
   <input class="input" placeholder="e.g., Refactored Auth Middleware" [value]="signalModel().title"
     (input)="updateSignal('title',$any($event.target).value)" />
-  @if (signalErrors().messages.includes('Task title is required.')) {
-  <small class="text-danger">Task title is required.</small>
+  @if (signalErrors().title) {
+  <small class="text-danger">{{signalErrors().title}}</small>
   }
 
   <div class="row">
@@ -21,8 +21,8 @@
       <label>TIME SPENT (H)</label>
       <input type="number" class="input" [value]="signalModel().timeSpent"
         (input)="updateSignal('timeSpent',+$any($event.target).value)" />
-      @if (signalErrors().messages.includes('Time spent must be greater than 0.')) {
-      <small class="text-danger">Time spent must be greater than 0.</small>
+      @if (signalErrors().timeSpent) {
+      <small class="text-danger">{{signalErrors().timeSpent}}</small>
       }
     </div>
 
@@ -37,8 +37,8 @@
     </button>
     }
   </div>
-  @if (signalErrors().messages.includes('Select at least one technology.')) {
-  <small class="text-danger">Select at least one technology.</small>
+  @if (signalErrors().techUsed) {
+  <small class="text-danger">{{signalErrors().techUsed}}</small>
   }
 
   <label>WHAT DID YOU LEARN?</label>
@@ -57,8 +57,7 @@
     }
   </div>
 
-  <button mat-raised-button color="primary" class="submit-btn" [disabled]="signalErrors().hasError"
-    (click)="submitSignal()">
+  <button mat-raised-button color="primary" class="submit-btn" [disabled]="hasError()" (click)="submitSignal()">
     LOG SESSION
   </button>
 

@@ -41,23 +41,18 @@ export class LogNewSessionComponent {
 
   protected signalSubmission = signal<Session | undefined>(undefined);
 
+  protected hasError = computed(() =>
+    !!(this.signalErrors().title || this.signalErrors().timeSpent || this.signalErrors().techUsed)
+  );
+
   protected signalErrors = computed(() => {
     const model = this.signalModel();
-    const messages: string[] = [];
 
-    if (!model.title.trim()) {
-      messages.push('Task title is required.');
-    }
-
-    if (!model.timeSpent || model.timeSpent <= 0) {
-      messages.push('Time spent must be greater than 0.');
-    }
-
-    if (model.techUsed.length === 0) {
-      messages.push('Select at least one technology.');
-    }
-
-    return { hasError: messages.length > 0, messages };
+    return {
+      title: !model.title.trim() ? 'Task title is required.' : null,
+      timeSpent: (!model.timeSpent || model.timeSpent <= 0) ? 'Time spent must be greater than 0.' : null,
+      techUsed: model.techUsed.length === 0 ? 'Select at least one technology.' : null,
+    };
   });
 
   protected updateSignal(field: keyof Session, value: string | string[] | number | Difficulty): void {
@@ -81,7 +76,7 @@ export class LogNewSessionComponent {
   }
 
   protected submitSignal(): void {
-    if (this.signalErrors().hasError) {
+    if (this.hasError()) {
       return;
     }
     this.signalSubmission.set(this.signalModel());
