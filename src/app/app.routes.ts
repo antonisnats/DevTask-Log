@@ -5,6 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { guestGuard } from './guards/guest.guard';
 import { authGuard } from './guards/auth.guard';
+import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
 
@@ -12,7 +13,7 @@ export const routes: Routes = [
     path : 'login', component: LoginComponent, canActivate: [guestGuard]
   },
   {
-    path:'register', component: RegisterComponent, canActivate: [guestGuard]
+    path:'register', component: RegisterComponent, canActivate: [guestGuard], canMatch: [adminGuard]
   },
   {
     path: 'homepage', component: HomepageComponent, canActivate: [authGuard]

@@ -9,13 +9,14 @@ import {
 import { Routes } from '../models/routes-model';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../components/dialog/dialog.component';
+import {RoleSelectionService} from './role-selection.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private auth: Auth, private router: Router, private dialog: MatDialog) { }
+  constructor(private auth: Auth, private router: Router, private dialog: MatDialog, private roleService: RoleSelectionService) { }
 
   private showDialog(message: string) {
     this.dialog.open(DialogComponent, {
@@ -55,6 +56,7 @@ export class AuthService {
       if (result) {
         signOut(this.auth).then(() => {
           this.router.navigate([Routes.login]);
+          this.roleService.clearRole();
         }).catch(err => {
           this.showDialog(err.message);
         });
