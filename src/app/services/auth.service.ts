@@ -25,8 +25,8 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    signInWithEmailAndPassword(this.auth, email, password).then(() => {
-      localStorage.setItem('token', 'true'); //na vrw tropo na to xrhsimopoiw me allon tropo giati ginetai exposed
+    signInWithEmailAndPassword(this.auth, email, password).then((userCredential) => {
+      const user = userCredential.user;
       this.router.navigate([Routes.home]);
     }).catch(err => {
       this.showDialog(err.message);
