@@ -1,15 +1,28 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { Auth, authState } from '@angular/fire/auth';
-import { ROUTES } from '../models/routes-model';
-import { map, take } from 'rxjs';
+import { Routes } from '../models/routes-model';
+import { filter, map, take } from 'rxjs';
 
-export const authGuard: CanActivateFn = () => {
+export const authGuard: CanActivateFn = (route, state) => {
   const auth = inject(Auth);
   const router = inject(Router);
 
+  console.log('[Guard] Evaluating navigation attempt', {
+    path: route.routeConfig?.path,
+    url: state.url,
+    params: route.params,
+  });
+
   return authState(auth).pipe(
+    filter(user => user !== undefined),
     take(1),
-    map(user => !!user || router.createUrlTree([ROUTES.LOGIN]))
-  );
+    map(user => {
+      if (user) {
+        return true;
+      } else {
+        return router.createUrlTree([Routes.login]);
+      }
+    })
+  )
 };

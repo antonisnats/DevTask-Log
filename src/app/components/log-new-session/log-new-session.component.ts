@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { Validators } from '../../models/validators.model';
 
 type Difficulty = 'Easy' | 'Medium' | 'Hard';
 
@@ -48,10 +49,10 @@ export class LogNewSessionComponent {
   protected signalErrors = computed(() => {
     const model = this.signalModel();
 
-    return {
-      title: !model.title.trim() ? 'Task title is required.' : null,
-      timeSpent: (!model.timeSpent || model.timeSpent <= 0) ? 'Time spent must be greater than 0.' : null,
-      techUsed: model.techUsed.length === 0 ? 'Select at least one technology.' : null,
+    return { //na ginei opws to ROUTES
+      title: !model.title.trim() ? Validators.title : null,
+      timeSpent: (!model.timeSpent || model.timeSpent <= 0) ? Validators.timeSpent : null,
+      techUsed: model.techUsed.length === 0 ? Validators.techUsed : null,
     };
   });
 
