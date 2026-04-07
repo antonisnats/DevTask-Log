@@ -78,14 +78,6 @@ export class LogNewSessionComponent {
     this.updateSignal('difficulty', level);
   }
 
-  protected submitSignal(): void {
-    if (this.hasError()) {
-      return;
-    }
-    this.signalSubmission.set(this.signalModel());
-    this.resetForm();
-  }
-
   private resetForm(): void {
     this.signalModel.set({
       title: '',
@@ -95,6 +87,14 @@ export class LogNewSessionComponent {
       notes: '',
       difficulty: 'Medium'
     });
+  }
+
+  protected submitSignal(): void {
+    if (this.hasError()) {
+      return;
+    }
+    this.signalSubmission.set(this.signalModel());
+    this.resetForm();
   }
 
   cancelForm() {
