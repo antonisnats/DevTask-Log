@@ -57,8 +57,12 @@
     }
   </div>
 
-  <button mat-raised-button color="primary" class="submit-btn" [disabled]="hasError()" (click)="submitSignal()">
-    LOG SESSION
-  </button>
+  <div class="button-container">
+    <button mat-raised-button color="primary" class="submit-btn" [disabled]="hasError()" (click)="submitSignal()">
+      Log Session
+    </button>
+
+    <button mat-raised-button color="primary" class="cancel-session" (click)="cancelForm()">Cancel</button>
+  </div>
 
 </div>

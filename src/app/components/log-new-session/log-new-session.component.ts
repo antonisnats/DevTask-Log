@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, EventEmitter, Output, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Validators } from '../../models/validators.model';
@@ -23,6 +23,8 @@ type Session = {
   styleUrls: ['./log-new-session.component.scss'],
 })
 export class LogNewSessionComponent {
+
+  @Output() close = new EventEmitter<void>();
 
   readonly TECH_OPTIONS = [
     'React', 'Angular', 'Vue', 'Node.js', 'Python',
@@ -49,7 +51,7 @@ export class LogNewSessionComponent {
   protected signalErrors = computed(() => {
     const model = this.signalModel();
 
-    return { //na ginei opws to ROUTES
+    return {
       title: !model.title.trim() ? Validators.title : null,
       timeSpent: (!model.timeSpent || model.timeSpent <= 0) ? Validators.timeSpent : null,
       techUsed: model.techUsed.length === 0 ? Validators.techUsed : null,
@@ -93,5 +95,9 @@ export class LogNewSessionComponent {
       notes: '',
       difficulty: 'Medium'
     });
+  }
+
+  cancelForm() {
+    this.close.emit();
   }
 }
