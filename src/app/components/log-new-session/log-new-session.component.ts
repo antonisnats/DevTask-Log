@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, EventEmitter, Output, signal } from '@angular/core';
+import { Component, computed, EventEmitter, inject, Output, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Validators } from '../../models/validators.model';
+import { SessionService } from '../../services/session.service';
 
 type Difficulty = 'Easy' | 'Medium' | 'Hard';
 
@@ -23,6 +24,8 @@ type Session = {
   styleUrls: ['./log-new-session.component.scss'],
 })
 export class LogNewSessionComponent {
+
+  private sessionService = inject(SessionService);
 
   @Output() close = new EventEmitter<void>();
 
@@ -94,6 +97,7 @@ export class LogNewSessionComponent {
       return;
     }
     this.signalSubmission.set(this.signalModel());
+    this.sessionService.addSession(this.signalModel());
     this.resetForm();
   }
 

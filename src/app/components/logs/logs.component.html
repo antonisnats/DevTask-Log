@@ -1,1 +1,49 @@
-<p>logs works!</p>
+<div class="logs-container">
+
+  <div class="header">
+    <h1>DevTask Log</h1>
+    <p>Don't just code, track your growth.</p>
+  </div>
+
+  <div class="filters">
+    @for (filter of filters(); track filter) {
+    <button (click)="setFilter(filter)" [class.active]="activeFilter() === filter">
+      {{ filter }}
+    </button>
+    }
+  </div>
+
+  <div class="cards">
+
+    @for (session of filteredSessions(); track session) {
+    <div class="card">
+
+      <div class="card-header">
+        <h3>{{ session.title }}</h3>
+        <span class="badge {{ session.difficulty.toLowerCase() }}">
+          {{ session.difficulty }}
+        </span>
+      </div>
+
+      <div class="learning">
+        <span>KEY LEARNING</span>
+        <p>{{ session.notes }}</p>
+      </div>
+
+      <div class="card-footer">
+
+        <div class="tech">
+          @for (tech of session.techUsed; track tech) {
+          <span class="tag">{{ tech }}</span>
+          }
+        </div>
+
+        <div class="meta">
+          <span>{{ session.timeSpent }}h</span>
+          <span>{{ session.date }}</span>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>

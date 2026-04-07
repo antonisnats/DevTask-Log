@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
+import { SessionService } from '../../services/session.service';
 
 @Component({
   selector: 'app-logs',
@@ -8,5 +9,26 @@ import { Component } from '@angular/core';
   styleUrl: './logs.component.scss'
 })
 export class LogsComponent {
+  private sessionService = inject(SessionService);
 
+  logsSessions = this.sessionService.sessions;
+
+  filters = signal<string[]>(['All Tasks', 'React', 'Angular', 'Vue', 'Node.js', 'Python',
+    'SQL', 'TypeScript', 'AWS', 'Docker', 'GraphQL']);
+
+  activeFilter = signal<string>('All Tasks');
+
+  filteredSessions = computed(() => {
+    if (this.activeFilter() === 'All Tasks') {
+      return this.logsSessions();
+    }
+
+    return this.logsSessions().filter(session =>
+      session.techUsed.includes(this.activeFilter())
+    );
+  });
+
+  setFilter(filter: string) {
+    this.activeFilter.set(filter);
+  }
 }
