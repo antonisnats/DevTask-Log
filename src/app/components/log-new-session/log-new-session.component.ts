@@ -102,7 +102,7 @@ export class LogNewSessionComponent {
     this.signalSubmission.set(this.signalModel());
     this.sessionService.addSession(this.signalModel());
     this.snackBar.openFromComponent(SessionSnackbarComponent, {
-      duration: 5000,
+      duration: 3000,
     });
     this.resetForm();
   }
