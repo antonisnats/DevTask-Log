@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_SNACK_BAR_DATA, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Component } from '@angular/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,7 +10,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './session-snackbar.component.scss'
 })
 export class SessionSnackbarComponent {
-
-  // constructor(@Inject(MAT_SNACK_BAR_DATA) public data: { message: string }) {}
 
 }
