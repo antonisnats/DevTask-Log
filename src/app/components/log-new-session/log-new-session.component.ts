@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Validators } from '../../models/validators.model';
 import { SessionService } from '../../services/session.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SessionSnackbarComponent } from '../../session-snackbar/session-snackbar.component';
 
 type Difficulty = 'Easy' | 'Medium' | 'Hard';
 
@@ -26,6 +28,7 @@ type Session = {
 export class LogNewSessionComponent {
 
   private sessionService = inject(SessionService);
+  private snackBar = inject(MatSnackBar);
 
   @Output() close = new EventEmitter<void>();
 
@@ -98,6 +101,9 @@ export class LogNewSessionComponent {
     }
     this.signalSubmission.set(this.signalModel());
     this.sessionService.addSession(this.signalModel());
+    this.snackBar.openFromComponent(SessionSnackbarComponent, {
+      duration: 5000,
+    });
     this.resetForm();
   }
 

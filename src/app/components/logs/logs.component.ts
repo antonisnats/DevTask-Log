@@ -14,7 +14,7 @@ export class LogsComponent {
   logsSessions = this.sessionService.sessions;
 
   filters = signal<string[]>(['All Tasks', 'React', 'Angular', 'Vue', 'Node.js', 'Python',
-    'SQL', 'TypeScript', 'AWS', 'Docker', 'GraphQL']);
+    'SQL', 'TypeScript', 'AWS', 'Docker', 'GraphQL']); //na ginei model key,value objects kai to value epeidh tha einai dunamiko na passarw mesa sto object to array
 
   activeFilter = signal<string>('All Tasks');
 
