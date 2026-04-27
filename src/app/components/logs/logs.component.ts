@@ -1,15 +1,18 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { SessionService } from '../../services/session.service';
+import { Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-logs',
   standalone: true,
-  imports: [],
+  imports: [MatButtonModule],
   templateUrl: './logs.component.html',
   styleUrl: './logs.component.scss'
 })
 export class LogsComponent {
   private sessionService = inject(SessionService);
+  private router = inject(Router);
 
   logsSessions = this.sessionService.sessions;
 
@@ -30,5 +33,9 @@ export class LogsComponent {
 
   setFilter(filter: string) {
     this.activeFilter.set(filter);
+  }
+
+  backButton() {
+    this.router.navigateByUrl('homepage');
   }
 }

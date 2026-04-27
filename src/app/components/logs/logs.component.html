@@ -5,6 +5,8 @@
     <p>Don't just code, track your growth.</p>
   </div>
 
+  <button mat-raised-button color="primary" class="back-button" (click)="backButton()">Back</button>
+
   <div class="filters">
     @for (filter of filters(); track filter) {
     <button (click)="setFilter(filter)" [class.active]="activeFilter() === filter">
