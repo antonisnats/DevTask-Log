@@ -19,11 +19,17 @@ export class SessionService {
 
   constructor() { }
 
-  private sessionSignal = signal<Session[]>([]);
+  private sessionSignal = signal<Session[]>(
+    JSON.parse(localStorage.getItem('sessions') ?? '[]')
+  );
 
   sessions = this.sessionSignal.asReadonly();
 
-  addSession(session: Session) {
-    this.sessionSignal.update(current => [...current, session]);
+  saveSession(session: Session) {
+    this.sessionSignal.update(current => {
+      const updated = [...current, session];
+      localStorage.setItem('sessions', JSON.stringify(updated));
+      return updated;
+    });
   }
 }
