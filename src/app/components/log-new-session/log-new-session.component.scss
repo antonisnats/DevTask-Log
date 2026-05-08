@@ -72,11 +72,12 @@ label {
 .difficulty-btn {
   flex: 1;
   border-radius: 20px;
+  background-color:#f3f5f9
 }
 
 .difficulty-btn.active {
   background: #0f172a !important;
-  color: white !important;
+  color: #8a94a6 !important;
 }
 
 .button-container {
