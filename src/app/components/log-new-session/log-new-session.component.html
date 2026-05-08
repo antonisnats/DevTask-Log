@@ -50,7 +50,7 @@
   <label>RELATIVE DIFFICULTY</label>
   <div class="difficulty">
     @for (level of DIFFICULTIES; track level) {
-    <button mat-button type="button" class="difficulty-btn" (click)="setDifficulty(level)"
+    <button mat-button type="button" class="difficulty-btn {{level.toLowerCase()}}" (click)="setDifficulty(level)"
       [class.active]="signalModel().difficulty === level">
       {{level}}
     </button>
