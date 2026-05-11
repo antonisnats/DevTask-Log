@@ -60,7 +60,7 @@
 
   <div class="button-container">
     <button mat-raised-button color="primary" class="submit-btn"
-      [disabled]="!sessionForm().valid()" (click)="submit()">
+      [disabled]="sessionForm().invalid()" (click)="onSubmit($event)">
       Log Session
     </button>
     <button mat-raised-button color="primary" class="cancel-session" (click)="cancelForm()">

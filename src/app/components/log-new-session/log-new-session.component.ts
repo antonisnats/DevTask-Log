@@ -1,5 +1,5 @@
-import { Component, signal, inject, Output, EventEmitter, computed } from '@angular/core';
-import { form, FormField, required } from '@angular/forms/signals';
+import { Component, signal, inject, Output, EventEmitter, computed, ChangeDetectionStrategy } from '@angular/core';
+import { form, FormField, required, submit } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { SessionService } from '../../services/session.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -22,6 +22,7 @@ type Session = {
   imports: [FormField, MatButtonModule],
   templateUrl: './log-new-session.component.html',
   styleUrls: ['./log-new-session.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LogNewSessionComponent {
 
@@ -76,13 +77,23 @@ export class LogNewSessionComponent {
     });
   }
 
-  protected submit(): void {
-    if (!this.sessionForm().valid()) return;
-
-    this.sessionService.saveSession(this.signalModel());
+  onSubmit(event: Event) {
+    event.preventDefault();
+    submit(this.sessionForm, async() => {
+      const credentials = this.signalModel();
+    })
     this.snackBar.openFromComponent(SessionSnackbarComponent, { duration: 3000 });
     this.resetForm();
+
   }
+
+  // protected submit(): void {
+  //   if (!this.sessionForm().valid()) return;
+
+  //   this.sessionService.saveSession(this.signalModel());
+  //   this.snackBar.openFromComponent(SessionSnackbarComponent, { duration: 3000 });
+  //   this.resetForm();
+  // }
 
   cancelForm(): void {
     this.close.emit();
