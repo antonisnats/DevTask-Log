@@ -1,8 +1,6 @@
-
-import { Component, computed, EventEmitter, inject, Output, signal } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { Component, signal, inject, Output, EventEmitter, computed } from '@angular/core';
+import { form, FormField, required } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
-import { Validators } from '../../models/validators.model';
 import { SessionService } from '../../services/session.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SessionSnackbarComponent } from '../../session-snackbar/session-snackbar.component';
@@ -21,7 +19,7 @@ type Session = {
 @Component({
   selector: 'app-log-new-session',
   standalone: true,
-  imports: [ReactiveFormsModule, MatButtonModule],
+  imports: [FormField, MatButtonModule],
   templateUrl: './log-new-session.component.html',
   styleUrls: ['./log-new-session.component.scss'],
 })
@@ -48,40 +46,25 @@ export class LogNewSessionComponent {
     difficulty: 'Medium'
   });
 
-  protected signalSubmission = signal<Session | undefined>(undefined);
-
-  protected hasError = computed(() =>
-    !!(this.signalErrors().title || this.signalErrors().timeSpent || this.signalErrors().techUsed)
-  );
-
-  protected signalErrors = computed(() => {
-    const model = this.signalModel();
-
-    return {
-      title: !model.title.trim() ? Validators.title : null,
-      timeSpent: (!model.timeSpent || model.timeSpent <= 0) ? Validators.timeSpent : null,
-      techUsed: model.techUsed.length === 0 ? Validators.techUsed : null,
-    };
+  protected sessionForm = form(this.signalModel, (fieldPath) => {
+    required(fieldPath.title);
+    required(fieldPath.timeSpent)
   });
 
-  protected updateSignal(field: keyof Session, value: string | string[] | number | Difficulty): void {
-    this.signalModel.update((current) => ({
-      ...current,
-      [field]: value
-    }));
-  }
+  protected techUsedError = computed(() =>
+    this.signalModel().techUsed.length === 0 ? 'Please select at least one technology' : null
+  );
 
   protected toggleTech(tech: string): void {
     const current = this.signalModel().techUsed;
     const updated = current.includes(tech)
       ? current.filter(t => t !== tech)
       : [...current, tech];
-
-    this.updateSignal('techUsed', updated);
+    this.signalModel.update(s => ({ ...s, techUsed: updated }));
   }
 
   protected setDifficulty(level: Difficulty): void {
-    this.updateSignal('difficulty', level);
+    this.signalModel.update(s => ({ ...s, difficulty: level }));
   }
 
   private resetForm(): void {
@@ -95,19 +78,15 @@ export class LogNewSessionComponent {
     });
   }
 
-  protected submitSignal(): void {
-    if (this.hasError()) {
-      return;
-    }
-    this.signalSubmission.set(this.signalModel());
+  protected submit(): void {
+    if (!this.sessionForm().valid() || this.techUsedError()) return;
+
     this.sessionService.saveSession(this.signalModel());
-    this.snackBar.openFromComponent(SessionSnackbarComponent, {
-      duration: 3000,
-    });
+    this.snackBar.openFromComponent(SessionSnackbarComponent, { duration: 3000 });
     this.resetForm();
   }
 
-  cancelForm() {
+  cancelForm(): void {
     this.close.emit();
   }
 }

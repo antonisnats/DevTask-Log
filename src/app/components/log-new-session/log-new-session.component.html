@@ -3,26 +3,27 @@
   <h2>Log New Session</h2>
 
   <label>TASK TITLE</label>
-  <input class="input" placeholder="e.g., Refactored Auth Middleware" [value]="signalModel().title"
-    (input)="updateSignal('title',$any($event.target).value)" />
-  @if (signalErrors().title) {
-  <small class="text-danger">{{signalErrors().title}}</small>
+  <input class="input" placeholder="e.g., Refactored Auth Middleware" [formField]="sessionForm.title" />
+  @if(sessionForm.title().invalid() && sessionForm.title().touched()) {
+  @for (errors of sessionForm.title().errors(); track errors.kind) {
+  <small class="text-danger">Title is required</small>
+  }
   }
 
   <div class="row">
 
     <div class="field">
       <label>DATE</label>
-      <input type="date" class="input" [value]="signalModel().date"
-        (input)="updateSignal('date',$any($event.target).value)" />
+      <input type="date" class="input" [formField]="sessionForm.date" />
     </div>
 
     <div class="field">
       <label>TIME SPENT (H)</label>
-      <input type="number" class="input" [value]="signalModel().timeSpent"
-        (input)="updateSignal('timeSpent',+$any($event.target).value)" />
-      @if (signalErrors().timeSpent) {
-      <small class="text-danger">{{signalErrors().timeSpent}}</small>
+      <input type="number" class="input" [formField]="sessionForm.timeSpent" />
+      @if(sessionForm.timeSpent().invalid() && sessionForm.timeSpent().touched()) {
+      @for (errors of sessionForm.timeSpent().errors(); track errors.kind) {
+      <small class="text-danger">Time spent is required</small>
+      }
       }
     </div>
 
@@ -37,15 +38,11 @@
     </button>
     }
   </div>
-  @if (signalErrors().techUsed) {
-  <small class="text-danger">{{signalErrors().techUsed}}</small>
-  }
 
   <label>WHAT DID YOU LEARN?</label>
-  <textarea class="textarea" [value]="signalModel().notes"
-    placeholder="Summarize the core insight or technical takeaway..."
-    (input)="updateSignal('notes',$any($event.target).value)">
-</textarea>
+  <textarea class="textarea" placeholder="Summarize the core insight or technical takeaway..."
+    [formField]="sessionForm.notes">
+  </textarea>
 
   <label>RELATIVE DIFFICULTY</label>
   <div class="difficulty">
@@ -58,11 +55,13 @@
   </div>
 
   <div class="button-container">
-    <button mat-raised-button color="primary" class="submit-btn" [disabled]="hasError()" (click)="submitSignal()">
+    <button mat-raised-button color="primary" class="submit-btn"
+      [disabled]="!sessionForm().valid() || !!techUsedError()" (click)="submit()">
       Log Session
     </button>
-
-    <button mat-raised-button color="primary" class="cancel-session" (click)="cancelForm()">Cancel</button>
+    <button mat-raised-button color="primary" class="cancel-session" (click)="cancelForm()">
+      Cancel
+    </button>
   </div>
 
 </div>
