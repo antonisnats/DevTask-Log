@@ -1,4 +1,4 @@
-import { Component, signal, inject, Output, EventEmitter, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal, inject, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { form, FormField, required, submit } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { SessionService } from '../../services/session.service';
@@ -86,14 +86,6 @@ export class LogNewSessionComponent {
     this.resetForm();
 
   }
-
-  // protected submit(): void {
-  //   if (!this.sessionForm().valid()) return;
-
-  //   this.sessionService.saveSession(this.signalModel());
-  //   this.snackBar.openFromComponent(SessionSnackbarComponent, { duration: 3000 });
-  //   this.resetForm();
-  // }
 
   cancelForm(): void {
     this.close.emit();
