@@ -44,6 +44,9 @@
   <textarea class="textarea" placeholder="Summarize the core insight or technical takeaway..."
     [formField]="sessionForm.notes">
   </textarea>
+  @if(sessionForm.notes().invalid() && sessionForm.notes().touched()) {
+    <small class="text-danger">Notes are required</small>
+  }
 
   <label>RELATIVE DIFFICULTY</label>
   <div class="difficulty">

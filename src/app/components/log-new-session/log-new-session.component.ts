@@ -49,7 +49,7 @@ export class LogNewSessionComponent {
   protected sessionForm = form(this.signalModel, (fieldPath) => {
     required(fieldPath.title);
     required(fieldPath.timeSpent);
-    required(fieldPath.techUsed);
+    required(fieldPath.notes);
   });
 
 
