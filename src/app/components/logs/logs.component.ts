@@ -34,7 +34,4 @@ export class LogsComponent {
     this.activeFilter.set(filter);
   }
 
-  backButton() {
-    this.router.navigateByUrl('homepage');
-  }
 }

@@ -39,6 +39,7 @@
     }
   </div>
 
+
   <label>WHAT DID YOU LEARN?</label>
   <textarea class="textarea" placeholder="Summarize the core insight or technical takeaway..."
     [formField]="sessionForm.notes">
@@ -56,7 +57,7 @@
 
   <div class="button-container">
     <button mat-raised-button color="primary" class="submit-btn"
-      [disabled]="!sessionForm().valid() || !!techUsedError()" (click)="submit()">
+      [disabled]="!sessionForm().valid()" (click)="submit()">
       Log Session
     </button>
     <button mat-raised-button color="primary" class="cancel-session" (click)="cancelForm()">

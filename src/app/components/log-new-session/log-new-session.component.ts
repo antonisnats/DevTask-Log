@@ -48,12 +48,10 @@ export class LogNewSessionComponent {
 
   protected sessionForm = form(this.signalModel, (fieldPath) => {
     required(fieldPath.title);
-    required(fieldPath.timeSpent)
+    required(fieldPath.timeSpent);
+    required(fieldPath.techUsed);
   });
 
-  protected techUsedError = computed(() =>
-    this.signalModel().techUsed.length === 0 ? 'Please select at least one technology' : null
-  );
 
   protected toggleTech(tech: string): void {
     const current = this.signalModel().techUsed;
@@ -79,7 +77,7 @@ export class LogNewSessionComponent {
   }
 
   protected submit(): void {
-    if (!this.sessionForm().valid() || this.techUsedError()) return;
+    if (!this.sessionForm().valid()) return;
 
     this.sessionService.saveSession(this.signalModel());
     this.snackBar.openFromComponent(SessionSnackbarComponent, { duration: 3000 });
