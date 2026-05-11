@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, computed, EventEmitter, inject, Output, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,7 +21,7 @@ type Session = {
 @Component({
   selector: 'app-log-new-session',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatButtonModule],
+  imports: [ReactiveFormsModule, MatButtonModule],
   templateUrl: './log-new-session.component.html',
   styleUrls: ['./log-new-session.component.scss'],
 })
