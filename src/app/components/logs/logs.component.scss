@@ -39,12 +39,12 @@
     color: #64748b;
     cursor: pointer;
     transition: 0.2s;
-  }
 
-  button.active {
-    background: #0f172a;
-    color: white;
-    border: none;
+    &.active {
+      background: #0f172a;
+      color: white;
+      border: none;
+    }
   }
 }
 
@@ -54,30 +54,30 @@
   padding: 20px;
   border: 1px solid #e2e8f0;
   margin-bottom: 16px;
+
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+  }
 }
 
 .badge {
   margin-bottom: 5px;
-}
 
-.badge.easy {
-  background: #e0e7ff;
-  color: #6366f1;
-}
+  &.easy {
+    background: #e0e7ff;
+    color: #6366f1;
+  }
 
-.badge.medium {
-  background: #fef3c7;
-  color: #d97706;
-}
+  &.medium {
+    background: #fef3c7;
+    color: #d97706;
+  }
 
-.badge.hard {
-  background: #fee2e2;
-  color: #dc2626;
-}
-
-.card h3 {
-  font-size: 16px;
-  font-weight: 600;
+  &.hard {
+    background: #fee2e2;
+    color: #dc2626;
+  }
 }
 
 .learning {
@@ -125,13 +125,6 @@
 }
 
 .meta {
-  display: flex;
-  gap: 12px;
   font-size: 12px;
   color: #94a3b8;
-}
-
-.back-button {
-  float: right;
-  margin-top: -120px;
 }

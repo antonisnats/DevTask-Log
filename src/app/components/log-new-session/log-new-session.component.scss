@@ -20,7 +20,6 @@ label {
 }
 
 .row {
-  display: flex;
   gap: 20px;
 }
 
@@ -32,23 +31,13 @@ label {
   padding-top: 40px;
 }
 
-.input {
+.input, .textarea {
   width: 100%;
   padding: 14px;
   border-radius: 14px;
   border: none;
   background: #f3f5f9;
   font-size: 14px;
-}
-
-.textarea {
-  width: 100%;
-  min-height: 110px;
-  padding: 14px;
-  border-radius: 14px;
-  border: none;
-  background: #f3f5f9;
-  resize: none;
 }
 
 .tech-list {
@@ -59,24 +48,22 @@ label {
 
 .tech-chip {
   border-radius: 20px;
-  font-size: 13px;
 }
 
 .tech-chip.active {
-  background: #0f172a !important;
-  color: white !important;
+  background: #0f172a;
+  color: #ffff;
 }
 
 .difficulty {
   display: flex;
   gap: 10px;
-  margin-top: 8px;
 }
 
 .difficulty-btn {
   flex: 1;
   border-radius: 20px;
-  background-color: #f3f5f9
+  background-color: #f3f5f9;
 }
 
 .difficulty-btn.easy.active {
@@ -99,12 +86,7 @@ label {
   justify-content: space-between;
 }
 
-.submit-btn {
-  margin-top: 30px;
-  border-radius: 18px;
-}
-
-.cancel-session {
+.submit-btn, .cancel-session {
   margin-top: 30px;
   border-radius: 18px;
 }
