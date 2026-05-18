@@ -2,7 +2,7 @@
 
 @if(showForm()) {
 <app-log-new-session (close)="closeForm()"></app-log-new-session>
-}
+} @else {
 
 <div class="homepage-container">
 
@@ -29,3 +29,4 @@
     </div>
   </div>
 </div>
+}
