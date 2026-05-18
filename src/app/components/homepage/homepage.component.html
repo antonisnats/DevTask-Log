@@ -1,5 +1,31 @@
 <app-navigation-bar (create)="openForm()"></app-navigation-bar>
 
 @if(showForm()) {
-  <app-log-new-session (close)="closeForm()"></app-log-new-session>
+<app-log-new-session (close)="closeForm()"></app-log-new-session>
 }
+
+<div class="homepage-container">
+
+  <div class="header">
+    <h1>DevTask Log</h1>
+    <p>Don't just code, track your growth.</p>
+  </div>
+
+  <div class="stats-container">
+    <div class="stat-card">
+      <span>TOTAL TASKS</span>
+      <h2>{{totalTasks()}}</h2>
+    </div>
+
+    <div class="stat-card">
+      <span>HOURS LOGGED</span>
+      <h2>{{totalHours()}}</h2>
+    </div>
+  </div>
+
+  <div class="technology-card">
+    <div class="technology-header">
+      <h3>TIME PER TECHNOLOGY</h3>
+    </div>
+  </div>
+</div>

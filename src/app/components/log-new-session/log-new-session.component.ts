@@ -82,6 +82,7 @@ export class LogNewSessionComponent {
     submit(this.sessionForm, async() => {
       const credentials = this.signalModel();
     })
+    this.sessionService.saveSession(this.signalModel());
     this.snackBar.openFromComponent(SessionSnackbarComponent, { duration: 3000 });
     this.resetForm();
 
