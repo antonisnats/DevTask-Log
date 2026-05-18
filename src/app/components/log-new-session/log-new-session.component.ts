@@ -4,6 +4,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { SessionService } from '../../services/session.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SessionSnackbarComponent } from '../../session-snackbar/session-snackbar.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {provideNativeDateAdapter} from '@angular/material/core';
+
 
 type Difficulty = 'Easy' | 'Medium' | 'Hard';
 
@@ -19,7 +24,8 @@ type Session = {
 @Component({
   selector: 'app-log-new-session',
   standalone: true,
-  imports: [FormField, MatButtonModule],
+  providers:[provideNativeDateAdapter()],
+  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatDatepickerModule,FormField],
   templateUrl: './log-new-session.component.html',
   styleUrls: ['./log-new-session.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

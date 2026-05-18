@@ -28,6 +28,10 @@ label {
   flex: 1;
 }
 
+.field:nth-child(1) {
+  padding-top: 40px;
+}
+
 .input {
   width: 100%;
   padding: 14px;

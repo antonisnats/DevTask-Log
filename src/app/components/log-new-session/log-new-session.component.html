@@ -13,8 +13,13 @@
   <div class="row">
 
     <div class="field">
-      <label>DATE</label>
-      <input type="date" class="input" [formField]="sessionForm.date" />
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
     </div>
 
     <div class="field">
@@ -45,7 +50,7 @@
     [formField]="sessionForm.notes">
   </textarea>
   @if(sessionForm.notes().invalid() && sessionForm.notes().touched()) {
-    <small class="text-danger">Notes are required</small>
+  <small class="text-danger">Notes are required</small>
   }
 
   <label>RELATIVE DIFFICULTY</label>
@@ -59,8 +64,8 @@
   </div>
 
   <div class="button-container">
-    <button mat-raised-button color="primary" class="submit-btn"
-      [disabled]="sessionForm().invalid()" (click)="onSubmit($event)">
+    <button mat-raised-button color="primary" class="submit-btn" [disabled]="sessionForm().invalid()"
+      (click)="onSubmit($event)">
       Log Session
     </button>
     <button mat-raised-button color="primary" class="cancel-session" (click)="cancelForm()">
