@@ -26,8 +26,17 @@
   <div class="technology-card">
     <div class="technology-header">
       <h3>TIME PER TECHNOLOGY</h3>
-      <pre>{{hoursPerTechnology()}}</pre>
     </div>
+
+    @if (hoursPerTechnology().length) {
+    <div class="tech-summary">
+      @for (data of hoursPerTechnology(); track data) {
+      <span class="tag">{{ data.name }} - {{ data.timeSpent }}h</span>
+      }
+    </div>
+    } @else {
+    <p class="empty">No data yet. Log a task to see insights.</p>
+    }
   </div>
 </div>
 }

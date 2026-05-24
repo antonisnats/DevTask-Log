@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { Session } from '../models/session-model';
 
 
@@ -25,5 +25,24 @@ export class SessionService {
     });
   }
 
-  //na kanw olous tous ypologismous pou kanw sto homepage component
+  totalTasks = computed(() => {
+    return this.sessions().length;
+  })
+
+  totalHours = computed(() => {
+    return this.sessions().reduce((total, session) => {
+      return total + session.timeSpent;
+    }, 0)
+  })
+
+  hoursPerTechnology = computed(() => {
+    const map = new Map<string, number>();
+
+    this.sessions().forEach(session => {
+      session.techUsed.forEach(tech => {
+        map.set(tech.name, session.timeSpent)
+      });
+    });
+     return [...map.entries()].map(([name,timeSpent]) => ({name, timeSpent}));
+  })
 }

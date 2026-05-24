@@ -15,9 +15,9 @@ export class HomepageComponent {
 
   ngOnInit() {
     console.log(this.sessionService);
-    console.log(this.sessionService.sessions().forEach(session => {
-      session.techUsed, session.timeSpent;
-    }));
+    console.log(this.totalTasks());
+    console.log(this.totalHours());
+    console.log(this.hoursPerTechnology());
   }
 
   showForm = signal(false);
@@ -31,21 +31,10 @@ export class HomepageComponent {
     this.showForm.set(false);
   }
 
-  totalTasks = computed(() => {
-    return this.sessionService.sessions().length;
-  })
+  totalTasks = this.sessionService.totalTasks;
 
-  totalHours = computed(() => {
-    return this.sessionService.sessions().reduce((total,session) => {
-      return total + session.timeSpent;
-    }, 0)
-  })
-
-  hoursPerTechnology = computed(() => {
-    return  this.sessionService.sessions().forEach(session => {
-      session.techUsed, session.timeSpent;
-    })
-  })
+  totalHours = this.sessionService.totalHours;
   
+  hoursPerTechnology = this.sessionService.hoursPerTechnology;
 
 }
