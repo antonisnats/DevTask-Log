@@ -1,5 +1,5 @@
 import { Component, signal, inject, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { form, FormField, required, submit } from '@angular/forms/signals';
+import { form, FormField, required } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { SessionService } from '../../services/session.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -74,12 +74,10 @@ export class LogNewSessionComponent {
 
   onSubmit(event: Event) {
     event.preventDefault();
-    submit(this.sessionForm, async () => {
-      const credentials = this.signalModel();
-    })
     this.sessionService.saveSession(this.signalModel());
-    this.snackBar.openFromComponent(SessionSnackbarComponent, { duration: 3000 });
     this.resetForm();
+    this.sessionForm().reset();
+    this.snackBar.openFromComponent(SessionSnackbarComponent, { duration: 3000 });
   }
 
   cancelForm(): void {
