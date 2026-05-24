@@ -1,16 +1,8 @@
 import { Injectable, signal } from '@angular/core';
+import { Session } from '../models/session-model';
 
 
 type Difficulty = 'Easy' | 'Medium' | 'Hard';
-
-export type Session = {
-  title: string;
-  date: string;
-  timeSpent: number;
-  techUsed: string[];
-  notes: string;
-  difficulty: Difficulty;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -32,4 +24,6 @@ export class SessionService {
       return updated;
     });
   }
+
+  //na kanw olous tous ypologismous pou kanw sto homepage component
 }

@@ -18,6 +18,7 @@ export class LogsComponent {
 
   filters = signal<string[]>(['All Tasks', 'React', 'Angular', 'Vue', 'Node.js', 'Python',
     'SQL', 'TypeScript', 'AWS', 'Docker', 'GraphQL']);
+
   activeFilter = signal<string>('All Tasks');
 
   filteredSessions = computed(() => {
@@ -26,7 +27,7 @@ export class LogsComponent {
     }
 
     return this.logsSessions().filter(session =>
-      session.techUsed.includes(this.activeFilter())
+      session.techUsed.some(t => t.name = this.activeFilter())
     );
   });
 

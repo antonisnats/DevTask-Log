@@ -15,8 +15,8 @@
     <div class="field">
       <mat-form-field>
         <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="picker">
-        <mat-hint>MM/DD/YYYY</mat-hint>
+        <input matInput [matDatepicker]="picker" [formField]="sessionForm.date">
+        <mat-hint>DD/MM/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -38,7 +38,7 @@
   <div class="tech-list">
     @for (tech of TECH_OPTIONS; track tech) {
     <button mat-stroked-button type="button" class="tech-chip" (click)="toggleTech(tech)"
-      [class.active]="signalModel().techUsed.includes(tech)">
+      [class.active]="signalModel().techUsed.some(t => t.name === tech)">
       {{tech}}
     </button>
     }

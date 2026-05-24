@@ -13,6 +13,13 @@ import { SessionService } from '../../services/session.service';
 export class HomepageComponent {
 
 
+  ngOnInit() {
+    console.log(this.sessionService);
+    console.log(this.sessionService.sessions().forEach(session => {
+      session.techUsed, session.timeSpent;
+    }));
+  }
+
   showForm = signal(false);
   private sessionService = inject(SessionService);
 
@@ -33,5 +40,12 @@ export class HomepageComponent {
       return total + session.timeSpent;
     }, 0)
   })
+
+  hoursPerTechnology = computed(() => {
+    return  this.sessionService.sessions().forEach(session => {
+      session.techUsed, session.timeSpent;
+    })
+  })
+  
 
 }

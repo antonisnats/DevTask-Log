@@ -4,28 +4,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { SessionService } from '../../services/session.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SessionSnackbarComponent } from '../../session-snackbar/session-snackbar.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {provideNativeDateAdapter} from '@angular/material/core';
-
-
-type Difficulty = 'Easy' | 'Medium' | 'Hard';
-
-type Session = {
-  title: string;
-  date: string;
-  timeSpent: number;
-  techUsed: string[];
-  notes: string;
-  difficulty: Difficulty;
-};
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { Difficulty, Session } from '../../models/session-model';
 
 @Component({
   selector: 'app-log-new-session',
   standalone: true,
-  providers:[provideNativeDateAdapter()],
-  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatDatepickerModule,FormField],
+  providers: [provideNativeDateAdapter()],
+  imports: [MatFormFieldModule, MatInputModule, MatButtonModule, MatDatepickerModule, FormField],
   templateUrl: './log-new-session.component.html',
   styleUrls: ['./log-new-session.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -37,20 +26,20 @@ export class LogNewSessionComponent {
 
   @Output() close = new EventEmitter<void>();
 
+  readonly DIFFICULTIES: Difficulty[] = ['Easy', 'Medium', 'Hard'];
+
   readonly TECH_OPTIONS = [
     'React', 'Angular', 'Vue', 'Node.js', 'Python',
     'SQL', 'TypeScript', 'AWS', 'Docker', 'GraphQL'
   ];
 
-  readonly DIFFICULTIES: Difficulty[] = ['Easy', 'Medium', 'Hard'];
-
-  protected signalModel = signal<Session>({
+  signalModel = signal<Session>({
     title: '',
     date: '',
-    timeSpent: 0,
-    techUsed: [],
     notes: '',
-    difficulty: 'Medium'
+    timeSpent: 0,
+    difficulty: '',
+    techUsed: []
   });
 
   protected sessionForm = form(this.signalModel, (fieldPath) => {
@@ -59,13 +48,13 @@ export class LogNewSessionComponent {
     required(fieldPath.notes);
   });
 
-
-  protected toggleTech(tech: string): void {
-    const current = this.signalModel().techUsed;
-    const updated = current.includes(tech)
-      ? current.filter(t => t !== tech)
-      : [...current, tech];
-    this.signalModel.update(s => ({ ...s, techUsed: updated }));
+  toggleTech(tech: string): void {
+    this.signalModel.update(s => ({
+      ...s,
+      techUsed: s.techUsed.find(t => t.name === tech)
+        ? s.techUsed.filter(t => t.name !== tech)
+        : [...s.techUsed, { name: tech }]
+    }));
   }
 
   protected setDifficulty(level: Difficulty): void {
@@ -79,22 +68,22 @@ export class LogNewSessionComponent {
       timeSpent: 0,
       techUsed: [],
       notes: '',
-      difficulty: 'Medium'
+      difficulty: ''
     });
   }
 
   onSubmit(event: Event) {
     event.preventDefault();
-    submit(this.sessionForm, async() => {
+    submit(this.sessionForm, async () => {
       const credentials = this.signalModel();
     })
     this.sessionService.saveSession(this.signalModel());
     this.snackBar.openFromComponent(SessionSnackbarComponent, { duration: 3000 });
     this.resetForm();
-
   }
 
   cancelForm(): void {
     this.close.emit();
   }
+
 }
