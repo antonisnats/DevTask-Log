@@ -27,7 +27,7 @@ export class LogsComponent {
     }
 
     return this.logsSessions().filter(session =>
-      session.techUsed.some(t => t.name = this.activeFilter())
+      session.techUsed.some(t => t.name === this.activeFilter())
     );
   });
 

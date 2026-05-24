@@ -49,12 +49,11 @@ export class LogNewSessionComponent {
   });
 
   toggleTech(tech: string): void {
-    this.signalModel.update(s => ({
-      ...s,
-      techUsed: s.techUsed.find(t => t.name === tech)
-        ? s.techUsed.filter(t => t.name !== tech)
-        : [...s.techUsed, { name: tech }]
-    }));
+    const current = this.signalModel().techUsed;
+    const updated = current.some(t => t.name === tech)
+      ? current.filter(t => t.name !== tech)
+      : [...current, { name: tech }];
+    this.signalModel.update(s => ({ ...s, techUsed: updated }));
   }
 
   protected setDifficulty(level: Difficulty): void {
