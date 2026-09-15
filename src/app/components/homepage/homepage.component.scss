@@ -1,6 +1,22 @@
+$color-heading: #0f172a;
+$color-muted: #475569;
+$color-empty: #334155;
+$color-border: #e2e8f0;
+$card-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+
+%card-base {
+  border-radius: 24px;
+  padding: 1.5rem;
+  border: 1px solid $color-border;
+  box-shadow: $card-shadow;
+}
+
 .homepage-container {
-  max-width: 820px;
-  padding-left: 240px;
+  padding: 50px;
+
+  @media (max-width: 800px) {
+    padding: 30px;
+  }
 
   .header {
     display: flex;
@@ -14,51 +30,53 @@
     gap: 1.5rem;
     margin-bottom: 2rem;
 
+    @media (max-width: 800px) {
+      display: block;
+    }
+
     .stat-card {
-      background: white;
-      border-radius: 24px;
-      padding: 1.5rem;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      @extend %card-base;
+      background: #cdc3ff;
+
+      @media (max-width: 800px) {
+        margin-bottom: 30px;
+      }
     }
   }
 
   .technology-card {
-    background: white;
-    border-radius: 24px;
-    padding: 1.5rem;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
-  }
+    @extend %card-base;
+    background: #ffc6c6;
 
-  .technology-header {
-    margin-bottom: 1.5rem;
+    .technology-header {
+      margin-bottom: 1.5rem;
 
-    h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #0f172a;
+      h3 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: $color-heading;
+      }
     }
-  }
 
-  .tech-summary {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 4px 0;
-  }
+    .tech-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 4px 0;
+    }
 
-  .tag {
-    background: #f1f5f9;
-    border: 1px solid #e2e8f0;
-    padding: 4px 10px;
-    border-radius: 10px;
-    font-size: 12px;
-    color: #475569;
+    .tag {
+      background: #f1f5f9;
+      border: 1px solid $color-border;
+      padding: 4px 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      color: $color-muted;
+    }
   }
 
   .empty {
     font-size: 13px;
-    color: #94a3b8;
+    color: $color-empty;
   }
 }
