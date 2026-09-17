@@ -2,11 +2,12 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { SessionService } from '../../services/session.service';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-logs',
   standalone: true,
-  imports: [MatButtonModule],
+  imports: [MatButtonModule,MatIconModule],
   templateUrl: './logs.component.html',
   styleUrl: './logs.component.scss'
 })
@@ -35,4 +36,7 @@ export class LogsComponent {
     this.activeFilter.set(filter);
   }
 
+  redirectToHomepage() {
+    this.router.navigateByUrl("/homepage");
+  }
 }
